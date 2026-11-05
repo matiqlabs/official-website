@@ -4,18 +4,9 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Arrow, Button, SectionLabel } from "@/components/ui";
+import type { BlogArticle } from "@/lib/blog-posts";
 
-export type BlogArticle = {
-  title: string;
-  slug: string;
-  category: string;
-  date: string;
-  readTime: string;
-  excerpt: string;
-  image?: string;
-  featured: boolean;
-  hasImage?: boolean;
-};
+export type { BlogArticle };
 
 function SearchIcon() {
   return (

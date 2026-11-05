@@ -14,12 +14,15 @@ export const metadata: Metadata = {
   title: siteCopy.meta.siteName,
   description: siteCopy.meta.description,
   keywords: siteCopy.meta.keywords,
+  alternates: { canonical: "/" },
   icons: {
     icon: "/matiq-icon.png",
     shortcut: "/matiq-icon.png",
     apple: "/matiq-icon.png",
   },
   openGraph: {
+    type: "website",
+    locale: "en_US",
     title: siteCopy.meta.siteName,
     description: siteCopy.meta.tagline,
     url: siteCopy.meta.baseUrl,
@@ -34,10 +37,29 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: siteCopy.meta.siteName,
+  url: siteCopy.meta.baseUrl,
+  logo: `${siteCopy.meta.baseUrl.replace(/\/$/, "")}/light-mode-logo.png`,
+  description: siteCopy.meta.description,
+  email: siteCopy.company.email,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Chennai",
+    addressCountry: "IN",
+  },
+};
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${jakarta.variable} ${jetbrains.variable} ${cormorant.variable} antialiased`}>
       <body className="min-h-screen bg-light text-ink">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <Nav />
         {children}
         <Footer />
